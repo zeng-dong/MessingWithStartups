@@ -22,25 +22,51 @@ namespace MessingWithStartups
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IDeveloper, AzureServiceBusDeveloper>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MessingWithStartups", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "General", Version = "v1" });
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {
+            services.AddSingleton<IDeveloper, MediatorDeveloper>();
+
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Development", Version = "v1" });
+            });
+        }
+
+        public void ConfigureStagingServices(IServiceCollection services)
+        {
+            services.AddSingleton<IDeveloper, RabbitMQDeveloper>();
+
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Staging", Version = "v1" });
+            });
+        }
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MessingWithStartups v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Messing with Startups v1"));
+            }
+            else if (env.IsStaging())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Settling with Startups v2"));
             }
 
             app.UseRouting();
