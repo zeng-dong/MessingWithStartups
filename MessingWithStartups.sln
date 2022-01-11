@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessingWithStartups", "MessingWithStartups.csproj", "{FBCC54F7-2458-45A6-919E-13D7C27A3680}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessingWithStartups", "MessingWithStartups.csproj", "{FBCC54F7-2458-45A6-919E-13D7C27A3680}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessingWithTests", "..\MessingWithTests\MessingWithTests.csproj", "{DDDC6DE2-6369-4562-B150-94FCFD9D89F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{FBCC54F7-2458-45A6-919E-13D7C27A3680}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBCC54F7-2458-45A6-919E-13D7C27A3680}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBCC54F7-2458-45A6-919E-13D7C27A3680}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDDC6DE2-6369-4562-B150-94FCFD9D89F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDDC6DE2-6369-4562-B150-94FCFD9D89F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDDC6DE2-6369-4562-B150-94FCFD9D89F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDDC6DE2-6369-4562-B150-94FCFD9D89F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
