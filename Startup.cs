@@ -24,7 +24,7 @@ namespace MessingWithStartups
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IDeveloper, AzureServiceBusDeveloper>();
+            services.AddSingleton<IDeveloper, AllPurposeDeveloper>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -33,9 +33,9 @@ namespace MessingWithStartups
             });
         }
 
-        public void ConfigureDevelopmentServices(IServiceCollection services)
+        public void ConfigureDevelopment_Services(IServiceCollection services)
         {
-            services.AddSingleton<IDeveloper, MediatorDeveloper>();
+            services.AddSingleton<IDeveloper, DevelopmentDeveloper>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -46,7 +46,7 @@ namespace MessingWithStartups
 
         public void ConfigureStagingServices(IServiceCollection services)
         {
-            services.AddSingleton<IDeveloper, RabbitMQDeveloper>();
+            services.AddSingleton<IDeveloper, StagingDeveloper>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -61,13 +61,44 @@ namespace MessingWithStartups
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Messing with Startups v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Developing with Startups v1"));
             }
             else if (env.IsStaging())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Settling with Startups v2"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Staging with Startups v2"));
             }
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+        }
+
+        public void ConfigureDevelopment(IApplicationBuilder app)
+        {
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Shiny Development Environment - Final"));
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+        }
+
+        public void ConfigureStaging(IApplicationBuilder app)
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Shiny Staging V-Final"));
 
             app.UseRouting();
 
